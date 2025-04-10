@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Tebak Bendera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="background-wave"></div>
+    <div class="particle-container"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top">
+        <div class="container-fluid d-flex flex-column align-items-center">
+            <div class="navbar-top d-flex justify-content-between w-100">
+                <div class="navbar-brand-container">
+                    <a class="navbar-brand" href="#" id="navbar-slogan">
+                        <i class="fas fa-flag me-2"></i>Tebak Bendera
+                    </a>
+                </div>
+                <div class="navbar-right d-flex align-items-center gap-2">
+                    <div class="lang-options d-flex gap-2">
+                        <a class="nav-link" href="#" id="lang-en">🇬🇧</a>
+                        <a class="nav-link" href="#" id="lang-id">🇮🇩</a>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-attempts-container">
+                <div class="navbar-attempts" id="navbar-attempts">Kesempatan: 3</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Indikator Loading -->
+    <div id="loading" class="loading">
+        <div class="spinner">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+        <p id="loading-text">Memuat data... ⏳</p>
+    </div>
+
+    <div class="container">
+        <h2 id="game-title">🌍 Tebak Bendera</h2>
+        <div class="flag-container">
+            <img id="flag-img" src="" alt="Bendera Negara">
+        </div>
+        <div class="choices">
+            <button class="choice-btn" data-index="0"></button>
+            <button class="choice-btn" data-index="1"></button>
+            <button class="choice-btn" data-index="2"></button>
+            <button class="choice-btn" data-index="3"></button>
+        </div>
+        <button id="confirm-btn" class="confirm-btn" onclick="confirmAnswer()" disabled>✅ Jawaban Yakin</button>
+    </div>
+
+    <!-- Pop-up untuk feedback -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button onclick="closePopup()" id="popup-ok-btn">OK</button>
+        </div>
+    </div>
+
+    <!-- Pop-up Token Habis -->
+    <div id="token-popup" class="popup">
+        <div class="popup-content">
+            <p id="token-message"></p>
+            <div class="token-popup-buttons">
+                <button onclick="watchAd()" id="watch-ad-btn">Tonton Iklan</button>
+                <button onclick="goToScore()" id="go-to-score-btn">Tidak, Lanjut ke Skor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Space Iklan -->
+    <div id="ad-space">
+        <p id="ad-placeholder">🔹 Space Iklan 🔹</p>
+    </div>
+
+    <!-- Tombol Kembali ke Menu -->
+    <a href="index.html" class="back-btn" id="back-btn">🏠 Kembali ke Menu</a>
+
+    <!-- Pop-up Tutorial -->
+    <div id="tutorial-popup" class="popup tutorial-popup">
+        <div class="tutorial-content">
+            <h3 id="tutorial-title">📜 Cara Bermain & Peraturan</h3>
+            <p id="rule-1">1. Pilih jawaban yang menurutmu benar.</p>
+            <p id="rule-2">2. Klik tombol "✅ Jawaban Yakin" untuk mengonfirmasi pilihanmu.</p>
+            <p id="rule-3">3. Jika jawaban benar ✅, lanjut ke pertanyaan berikutnya.</p>
+            <p id="rule-4">4. Kamu akan diberikan 3 kali kesempatan</p>
+            <p id="rule-5">5. Jika jawaban salah ❌, kesempatan berkurang.</p>
+            <p id="rule-6">6. Jika kesempatan habis, token akan berkurang dan permainan berakhir.</p>
+            <button onclick="closeTutorial()" id="start-game-btn">Mulai Game</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="game.js"></script>
+</body>
+</html>
