@@ -351,31 +351,79 @@ function createSharePamflet(score, correctAnswers, level) {
         canvas.height = 630;
         const ctx = canvas.getContext("2d");
 
+        // Background gradient
         const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
         gradient.addColorStop(0, "#000957");
         gradient.addColorStop(1, "#344CB7");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 1200, 630);
 
-        ctx.fillStyle = "#FFD700";
+        // Peta dunia (simulasi dengan pola garis acak)
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 50; i++) {
+            ctx.beginPath();
+            ctx.moveTo(Math.random() * 1200, Math.random() * 630);
+            ctx.lineTo(Math.random() * 1200, Math.random() * 630);
+            ctx.stroke();
+        }
+
+        // Teks "TEBAK BENDERA" di kiri atas
+        ctx.fillStyle = "#00DDEB";
         ctx.font = "bold 60px Poppins";
+        ctx.textAlign = "left";
+        ctx.fillText(savedLang === "en" ? "FLAG QUIZ" : "TEBAK BENDERA", 50, 100);
+
+        // Teks "Correct Answers: [jumlah]"
+        ctx.font = "bold 80px Poppins";
         ctx.textAlign = "center";
-        ctx.fillText(savedLang === "en" ? "Flag Quiz Triumph" : "Kemenangan Tebak Bendera", 600, 100);
+        ctx.fillText(savedLang === "en" ? `Correct Answers: ${correctAnswers}` : `Jawaban Benar: ${correctAnswers}`, 600, 300);
 
-        ctx.fillStyle = "white";
+        // Teks "You"
         ctx.font = "bold 50px Poppins";
-        ctx.fillText(savedLang === "en" ? `Score: ${score}` : `Skor: ${score}`, 600, 250);
-        ctx.font = "40px Poppins";
-        ctx.fillText(savedLang === "en" ? `Correct: ${correctAnswers}` : `Benar: ${correctAnswers}`, 600, 350);
+        ctx.fillText(savedLang === "en" ? "You" : "Kamu", 600, 380);
+
+        // Ikon Globe di kanan atas
+        ctx.beginPath();
+        ctx.arc(1050, 100, 60, 0, Math.PI * 2);
+        ctx.fillStyle = "#FF6200";
+        ctx.fill();
+        ctx.strokeStyle = "#FFD700";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        ctx.font = "60px 'Font Awesome 5 Free'";
         ctx.fillStyle = "#FFD700";
-        ctx.font = "bold 45px Poppins";
-        ctx.fillText(`Level: ${level}`, 600, 450);
+        ctx.textAlign = "center";
+        ctx.fillText("\uf0ac", 1050, 120); // Ikon globe
 
-        ctx.fillStyle = "white";
-        ctx.font = "30px Poppins";
-        ctx.fillText(savedLang === "en" ? "Try it at Tebak Bendera!" : "Coba di Tebak Bendera!", 600, 550);
+        // Level Badge di kanan bawah
+        ctx.fillStyle = "#FF6200";
+        ctx.beginPath();
+        ctx.moveTo(900, 450);
+        ctx.lineTo(1150, 450);
+        ctx.quadraticCurveTo(1170, 450, 1170, 470);
+        ctx.lineTo(1170, 520);
+        ctx.quadraticCurveTo(1170, 540, 1150, 540);
+        ctx.lineTo(900, 540);
+        ctx.quadraticCurveTo(880, 540, 880, 520);
+        ctx.lineTo(880, 470);
+        ctx.quadraticCurveTo(880, 450, 900, 450);
+        ctx.fill();
+        ctx.strokeStyle = "#FFD700";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "bold 30px Poppins";
+        ctx.fillText(savedLang === "en" ? `LEVEL: ${level}` : `LEVEL: ${level}`, 1025, 500);
 
-        ctx.font = "20px Poppins";
+        // Skor di bawah "You"
+        ctx.fillStyle = "#00DDEB";
+        ctx.font = "bold 40px Poppins";
+        ctx.fillText(savedLang === "en" ? `Score: ${score}` : `Skor: ${score}`, 600, 460);
+
+        // Logo Ghozy Games (teks sederhana)
+        ctx.fillStyle = "#FFD700";
+        ctx.font = "italic 25px Poppins";
         ctx.fillText("© 2025 Ghozy Games", 600, 600);
 
         const dataUrl = canvas.toDataURL("image/png", 1.0);
